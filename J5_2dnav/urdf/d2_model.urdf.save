@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<robot name="double_2">
+  
+  <material name ="black">
+    <color rgba ="0 0 0 1"/>
+  </material>
+  <material name="white">
+    <color rgba="1 1 1 1"/>
+  </material>
+  <material name ="grey">
+    <color rgba=".5 .5 .5 1"/>
+  </material>
+  
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <cylinder length =".1524" radius =".1016"/>
+      </geometry>
+      <origin rpy="1.57075 0 0" xyz="0 0 0"/>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.6" radius="0.2"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="right_wheel">
+    <visual>
+      <geometry>
+        <cylinder length =".0508" radius =".12"/>
+      </geometry>
+      <origin rpy ="1.57075 0 0" xyz="0 -.1016 0"/>
+      <material name ="black"/>
+    </visual>
+  </link>
+  <link name="left_wheel">
+    <visual>
+      <geometry>
+        <cylinder length =".0508" radius =".12"/>
+      </geometry>
+      <origin rpy ="1.57075 0 0" xyz="0 .1016 0"/>
+      <material name ="black"/>
+    </visual>
+  </link>
+  <link name="ipad_post">
+    <visual>
+      <geometry>
+        <cylinder length =".8636" radius =".01905"/>
+      </geometry>
+      <origin rpy ="0 0 1" xyz="0 0 .4326"/>
+      <material name ="black"/>
+    </visual>
+  </link>
+  <link name="ipad_holder">
+    <visual>
+      <geometry>
+        <box size =".0381 .2032 .254"/>
+      </geometry>
+      <origin rpy ="0 0 0" xyz="0.01905 0 .8636"/>
+      <material name ="black"/>
+    </visual>
+  </link>
+  <joint name ="right_wheel_joint" type ="fixed">
+    <origin rpy ="0 0 0" xyz="0 0 0"/>
+    <axis xyz ="0 1 0"/>
+    <parent link="base_link"/>
+    <child link="right_wheel"/>
+  </joint>
+  <joint name ="left_wheel_joint" type ="fixed">
+    <origin rpy ="0 0 0" xyz="0 0 0"/>
+    <axis xyz ="0 1 0"/>
+    <parent link="base_link"/>
+    <child link="left_wheel"/>
+  </joint>
+  <joint name ="ipad_holder" type ="fixed">
+    <origin rpy ="0 0 0" xyz="0 0 0"/>
+    <axis xyz ="0 1 0"/>
+    <parent link="base_link"/>
+    <child link="ipad_post"/>
+  </joint>
+  <joint name ="ipad_mount" type ="fixed">
+    <origin rpy ="0 0 0" xyz="0 0 0"/>
+    <axis xyz ="0 1 0"/>
+    <parent link="ipad_post"/>
+    <child link="ipad_holder"/>
+  </joint >
+
+</robot>
+
+

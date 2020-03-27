@@ -1,0 +1,14 @@
+<launch>
+
+  <arg name="model" default="$(find J5_2dnav)/urdf/d2_model.urdf"/>
+  <arg name="gui" default="true" />
+  <arg name="rvizconfig" default="$(find J5_2dnav)/rviz/viewer.rviz" />
+
+  <param name="use_gui" value="$(arg gui)"/>
+  <param name="robot_description" command="cat $(find J5_2dnav)/urdf/d2_model.urdf"/>
+
+  <!--node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" /-->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+  <node name="state_publisher" pkg="d2_urdf" type="state_publisher" />
+</launch>

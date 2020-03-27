@@ -1,0 +1,15 @@
+{"origin":
+	{"x": -3.15,
+	 "y":0.87,
+	 "rz":0.0,
+         "video":"/home/spencer/Videos/SampleVideo_360x240_2mb.mp4"},
+ "loc1":{
+	 "x": 1.0,
+	 "y":2.0,
+	 "rz":3.0,
+         "video":"/home/spencer/Videos/SampleVideo_640x360_5mb.mp4"},
+ "loc2":{
+	 "x": 1.0,
+	 "y":2.0,
+	 "rz":3.0,
+         "video":"/home/spencer/Videos/SampleVideo_640x360_5mb.mp4"}}
