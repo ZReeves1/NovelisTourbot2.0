@@ -16,6 +16,7 @@ class tour():
   def read_locations(self,filename):
     with open(filename,'r') as l:
       locations= json.load(l)
+      rospy.loginfo(locations)
     #read in location list
     #l = '{"origin":{"x": 0.0,"y":0.0,"rz":0.0},"loc1":{"x": 1.0,"y":2.0,"rz":3.0}}'
     #locations= json.loads(l)
@@ -23,21 +24,14 @@ class tour():
 
 
   def __init__(self):
-    fname = '/home/spencer/catkin_ws/src/tour_guide/src/tour.json'
+    argv= rospy.myargv(argv=sys.argv)
+    fname = argv[1]
     locations = self.read_locations(fname)
     rospy.init_node('tour',anonymous = False)
-    for i in locations:
-      rospy.loginfo("moving to %s",i)
-      if "x" in locations[i] and "y" in locations[i] and "rz" in locations[i]:
-       self.goalReached = self.moveToGoal(locations[i].get("x"), locations[i].get("y"),locations[i].get("rz"))
-      else:
-        rospy.logerr("bad locataion data check key")  
-      #print(locations[i].get("x"))
-      if "video" in locations[i]:
-        rospy.loginfo("playing video about %s",i)
-        self.play_vid(locations[i].get("video"))
     
-
+    for i in locations:
+      rospy.loginfo("moving to %s",i.get("name"))
+      self.goalReached = self.moveToGoal(i.get("x"), i.get("y"),i.get("rz"))
  
   def shutdown(self):
     #stop the program at the end of tour
@@ -111,6 +105,8 @@ class tour():
 
   
 if __name__ == '__main__':
-  tour()
-  rospy.spin()
-  
+  try:
+    tour()
+    rospy.spin()
+  except rospy.ROSInterruptException:
+    pass 

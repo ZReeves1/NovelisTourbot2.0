@@ -1,0 +1,21 @@
+<library path="src">
+  <class name="tour making gui" type="novelis_rqt_pkg.my_module.MyPlugin" base_class_type="rqt_gui_py::Plugin">
+    <description>
+      tour bot packages including a gui for making and saving points 
+    </description>
+    <qtgui>
+      <!-- optional grouping...
+      <group>
+        <label>Group</label>
+      </group>
+      <group>
+        <label>Subgroup</label>
+      </group>
+      -->
+      <label>Novelis tour guide plugin</label>
+      <icon type="theme">system-folder</icon>
+      <statustip>Great user interface to provide real value.</statustip>
+    </qtgui>
+  </class>
+</library>
+

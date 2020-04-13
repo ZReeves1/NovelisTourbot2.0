@@ -1,0 +1,9 @@
+<launch>
+
+  <arg name="map_file" default="$(find tour_guide)/maps/house_map.yaml"/>
+  <arg name="tour_file" default="$(find tour_guide)/tours/tour.json"/>
+  <!-- Map server -->
+  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
+  <node pkg="tour_guide" type="tour_maker.py" name="tourmaker" output="screen" args="$(arg tour_file)"/>
+  <node pkg="rviz" type="rviz" name="rviz" required="true"/>
+</launch>
