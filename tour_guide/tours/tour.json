@@ -9,7 +9,7 @@
 	 "y":0.12,
 	 "rz":-0.618,
          "video":"/home/spencer/Videos/SampleVideo_360x240_2mb.mp4",
-         "door":"1"},
+         "door":"0"},
  {"name":"loc1",
          "x": 1.0,
 	 "y":2.0,

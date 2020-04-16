@@ -1,0 +1,3 @@
+<launch>  
+	<node name="door_server" pkg="door" type="door_server.py"/>
+</launch>

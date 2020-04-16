@@ -19,4 +19,7 @@
 
 <!-- launch the intel camera 2/24 very buggy-->
 <include file="$(find realsense2_camera)/launch/rs_t265.launch"/>
+
+<!--launch the rosnodejs running the cmdvel bridge-->
+<node name="restful_bridge_server" pkg="bluetooth_bridge" type="server.js" />
 </launch> 

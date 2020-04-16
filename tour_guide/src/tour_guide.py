@@ -1,12 +1,13 @@
 #! /usr/bin/env python
 
 #this is the client for controling a robot with a list of points
-
+#it is the main file for conducting tours 
 #import the required libraries
 import rospy
 import actionlib
 import json
 import cv2
+#import messages and math 
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from math import radians, degrees
 from actionlib_msgs.msg import *
@@ -17,7 +18,7 @@ from door.srv import *
 class tour():
  
   def read_locations(self,filename):
-  #read in the tour file that contains tour information
+  #read in the tour file that contains tour information and return list of python dicts
     with open(filename,'r') as l:
       locations= json.load(l)
       rospy.loginfo(locations)
@@ -28,28 +29,38 @@ class tour():
 
 
   def __init__(self):
-    #start the ros tour node
+    
+    #provide command line interface for reading files from command line and launch files
     argv= rospy.myargv(argv=sys.argv)
-    #read file location from command line
     fname = argv[1]
     locations = self.read_locations(fname)
+    
     #begin the tour node
     rospy.init_node('tour',anonymous = False)
     
+    #conduct the tours by looping through the list of locations
     for i in locations:
+      
+      #log next location to send robot to
       rospy.loginfo("moving to %s",i.get("name"))
+      
+      #call the moveToGoal action and waitfor its response
       self.goalReached = self.moveToGoal(i.get("x"), i.get("y"),i.get("rz"))
+      
+      #check for door at given location
       if int(i.get("door")) != 0:
-        print(type(i.get("door")))
+        #print(type(i.get("door")))
         rospy.loginfo("opening door")
         self.dooropened = self.open_door(int(i.get("door")))
       else:
         rospy.loginfo('no door to open')
-
+  
+  #cleanly shudown ros
   def shutdown(self):
     #stop the program at the end of tour
     rospy.loginfo("quit program")
     rospy.sleep()
+  
   
   def moveToGoal(self,x,y,rz):
     #define a client to send movement commands to the movebase server 
@@ -84,6 +95,7 @@ class tour():
       rospy.loginfo("the robot failed to reach the goal")
       return False
 
+  #call open door server
   def open_door(self,door):
     rospy.wait_for_service('door')
     rospy.loginfo('opening door number: %s',door)
@@ -91,6 +103,7 @@ class tour():
     resp1 = od(door)
     return resp1.opened
 
+  #play videos for simulation
   def play_vid(self,vidpath):
 
     # Create a VideoCapture object and read from input file
@@ -130,6 +143,7 @@ class tour():
   
 if __name__ == '__main__':
   try:
+    #call the tour
     tour()
     rospy.spin()
   except rospy.ROSInterruptException:
