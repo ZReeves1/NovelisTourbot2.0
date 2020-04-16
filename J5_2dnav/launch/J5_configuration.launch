@@ -4,7 +4,6 @@
     <!--param name="transform_configuration_param" value="param_value" /-->
  </node>
 
-
 <!--launch lidar scan node-->
    <node pkg="rplidar_ros" type="rplidarNode" name="rplidarNode" output="screen">
     <param name="serial_port"         type="string" value="/dev/ttyUSB0"/>
@@ -15,15 +14,9 @@
   <param name="angle_compensate"    type="bool"   value="true"/>
  </node>
 
-
  <!--node pkg="odom_publisher" type="py_odom_publisher.py" name="odom_publisher" output="screen">
-
  </node-->
-
 
 <!-- launch the intel camera 2/24 very buggy-->
 <include file="$(find realsense2_camera)/launch/rs_t265.launch"/>
-
-
-
 </launch> 

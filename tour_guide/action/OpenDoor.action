@@ -1,0 +1,8 @@
+# Define the goal
+uint32 door_id  # Specify which door we want to open
+---
+# Define the result
+bool Door_opened
+---
+
+

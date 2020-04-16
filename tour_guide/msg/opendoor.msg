@@ -1,0 +1,2 @@
+int64 door_id
+bool opened
