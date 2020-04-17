@@ -8,7 +8,7 @@ import time
 def handle_door(req):
     rospy.loginfo('sending open door command to door %s', req.door_id)
     GPIO.output(4,GPIO.HIGH)
-    time.sleep(.1)
+    time.sleep(1)
     GPIO.output(4,GPIO.LOW)
     return True
 

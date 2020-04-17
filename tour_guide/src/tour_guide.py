@@ -47,11 +47,14 @@ class tour():
       #call the moveToGoal action and waitfor its response
       self.goalReached = self.moveToGoal(i.get("x"), i.get("y"),i.get("rz"))
       
+      
       #check for door at given location
       if int(i.get("door")) != 0:
         #print(type(i.get("door")))
         rospy.loginfo("opening door")
         self.dooropened = self.open_door(int(i.get("door")))
+        if self.dooropened == True:
+          rospy.loginfo('going through door')
       else:
         rospy.loginfo('no door to open')
   
@@ -69,6 +72,7 @@ class tour():
     while(not ac.wait_for_server(rospy.Duration.from_sec(5.0))):
       rospy.loginfo("waiting for move base server")
     #construct move base goal object
+    
     goal = MoveBaseGoal()
     
     #populate data for moving the goal with provided data
@@ -83,7 +87,7 @@ class tour():
     #log robot is sending data  and  send goal
     rospy.loginfo("Sending goal location")
     ac.send_goal(goal)
-    
+
     #wait 120 seconds to reach goal
     ac.wait_for_result(rospy.Duration(120))
     
@@ -99,8 +103,9 @@ class tour():
   def open_door(self,door):
     rospy.wait_for_service('door')
     rospy.loginfo('opening door number: %s',door)
-    od = rospy.ServiceProxy('door', opendoor)
+    od = rospy.ServiceProxy('door', opendoor,False)
     resp1 = od(door)
+    
     return resp1.opened
 
   #play videos for simulation
