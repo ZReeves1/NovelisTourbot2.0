@@ -1,0 +1,3 @@
+#sudo -E su -c "export PYTHONPATH=/opt/ros/melodic/lib/python2.7/dist-packages && python bridge.py"
+sudo -E su -c "export PYTHONPATH=/opt/ros/melodic/lib/python2.7/dist-packages && source /opt/ros/melodic/setup.bash && BLENO_HCI_DEVICE_ID=1 node index.js"
+

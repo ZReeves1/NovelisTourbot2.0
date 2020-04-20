@@ -1,0 +1,20 @@
+    # n = len(ranges)
+    # angle_min, incriment = msg.angle_min, msg.angle_increment
+    # angles = angle_min + np.arange(n)*incriment
+    # x = ranges*np.cos(angles)
+    # y = ranges*np.sin(angles)
+    # points_mm = np.array(np.floor(np.vstack((x, y))*1000).T, dtype=np.int16) # millimeters
+    
+    ## Display the points:
+    # max_cm = 56
+    # points_idx = points_mm//10+max_cm//2
+    # x = points_idx[:,0]
+    # y = points_idx[:,1]
+    # grid = np.zeros((max_cm, max_cm), dtype=np.uint8) # occupancy grid  mac_cm x max_cm
+    # points_inrange = points_idx[np.logical_and(x>=0, x<=max_cm-1) & np.logical_and(y>=0,y<=max_cm-1), :]
+    # grid[points_inrange[:,0], points_inrange[:,1]] = 1
+    # print(grid)
+    # time.sleep(0.005)
+    
+    # points_mm_flat = points_mm.flatten()
+    # len(points_mm_flat)

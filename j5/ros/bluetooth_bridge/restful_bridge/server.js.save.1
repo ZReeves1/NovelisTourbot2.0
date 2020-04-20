@@ -1,0 +1,31 @@
+#!/usr/bin/node
+const express = require('express');
+const rosEmitter = require('./ros-subscriber');
+
+var moveCmd ={};
+var lidarData = {};
+var posData = {};
+
+rosEmitter.twistMsg.on('update',(moveCmdUpdate) =>{moveCmd=moveCmdUpdate;})
+rosEmitter.lidarMsg.on('update', (lidarDataUpdate) => {lidarData=lidarDataUpdate;})
+rosEmitter.posMsg.on('update', (posDataUpdate) => {posData=posDataUpdate;})
+
+const app = express();
+
+
+app.get('/cmd_vel',function(req,res){
+  res.end(JSON.stringify(moveCmd));
+})
+app.get('/scan', function (req, res) {
+  res.end(JSON.stringify(lidarData));
+})
+
+app.get('/pos', function (req, res) {
+  res.end(JSON.stringify(posData))
+})
+
+var server = app.listen(3000, function () {
+   var host = server.address().address
+   var port = server.address().port
+   console.log("Example app listening at http://%s:%s", host, port)
+})

@@ -1,0 +1,47 @@
+const rosnodejs = require('rosnodejs')
+const EventEmitter = require('events');
+
+class RosEmitter extends EventEmitter {}
+
+const cmd_velmsgEmitter = new RosEmitter();
+const lidarMsgEmitter = new RosEmitter();
+const posMsgEmitter = new RosEmitter();
+
+function moveCmdCB(msg){
+  console.log("move is",)
+  cmd_velmsgEmitter.emit('update',{
+    x: msg.linear.x
+   az: msg.angular.z
+  });
+}
+
+function lidarCB(msg){
+  console.log("scan is", msg.ranges.length, "points long.")
+  lidarMsgEmitter.emit('update', {
+    frame: msg.header.seq,
+    ranges: msg.ranges,
+    angle_min: msg.angle_min,
+    angle_max: msg.angle_max
+  });
+}
+
+function posCB(msg){
+  posMsgEmitter.emit('update', {
+    frame: msg.header.seq,
+    pose: msg.pose.pose
+  });
+}
+
+rosnodejs.initNode('data_bridge').then((nh) => {
+  nh.subscribe('/scan', 'sensor_msgs/LaserScan', lidarCB)
+  nh.subscribe('/camera/odom/sample', 'nav_msgs/Odometry', posCB)
+  nh.subscribe('/cmd_vel','geometry_msgs/Twist',moveCmdCB)
+});
+
+console.log("Test if this runs...");
+
+module.exports = {
+  'lidarMsg' : lidarMsgEmitter,
+  posMsg: posMsgEmitter
+}
+// lidarMsg.on('update', (msg)=>{global_msg = msg});

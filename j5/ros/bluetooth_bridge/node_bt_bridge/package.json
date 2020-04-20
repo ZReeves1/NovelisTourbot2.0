@@ -1,0 +1,15 @@
+{
+  "name": "bluetooth_transmit",
+  "version": "1.0.0",
+  "description": "Package to transmit sensor data via bluetooth",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bleno": "",
+    "rosnodejs": ""
+  },
+  "author": "Alec Graves",
+  "license": "GPL-3.0"
+}

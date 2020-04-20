@@ -1,0 +1,5 @@
+<launch>
+  <include file="$(find bluetooth_bridge)/launch/rplidar.launch" />
+  <include file="$(find bluetooth_bridge)/launch/t265.launch" />
+  <node name="restful_bridge_server" pkg="bluetooth_bridge" type="server.js" />
+</launch>
