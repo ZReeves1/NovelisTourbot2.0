@@ -13,6 +13,7 @@ from math import radians, degrees
 from actionlib_msgs.msg import *
 from geometry_msgs.msg import Point
 from door.srv import *
+import time
 
 #define tour class that contains tour operations
 class tour():
@@ -46,7 +47,9 @@ class tour():
       
       #call the moveToGoal action and waitfor its response
       self.goalReached = self.moveToGoal(i.get("x"), i.get("y"),i.get("rz"))
-      
+      if self.goalReached == True:
+        rospy.loginfo("at %s",i.get("name"))
+        time.sleep(1.0)
       
       #check for door at given location
       if int(i.get("door")) != 0:

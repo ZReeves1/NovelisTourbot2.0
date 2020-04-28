@@ -19,8 +19,26 @@ tour_guide
 door
 various other packages for testing purposes 
 # usage
+## setup
+install ubuntu on raspberry pi
+follow instructions at https://www.ros.org/install/ to install ros for your selected distrobution
+create a catkin_ws 
+
+cd into catkin_ws source directory
+
+clone the tour guide package into src
+
+build the package
+## tuning
+the following files need to be tuned for the chosen robot.
+
+base_local_planner_params.yaml
+global_costmap_params.yaml
+costmap_common_params.yaml
+local_costmap_params.yaml
 ## tour structure
 this navigation implemetaon relies on pre mapping the building that will be toured and providing a list of points for the robot to take people to see. tours need to also have doors  listed as points of intrest and thier ids listed as points of intrest 
+
 ```javascript
 [{"name":"name of location",
 	 "x": x corrdnate,
@@ -29,13 +47,33 @@ this navigation implemetaon relies on pre mapping the building that will be tour
          "video":"video location",
          "door":"door id, 0 if there is no door"}]
 ```
-
+# running tours
 ## real robot
-
-### mapping
-
+this all un tested however below are the instructions for how it is supossed to work
+### mapping/creating tours
+## launch Gmapping
+```
+roslaunch J5_2dnav j5_mapping.launch
+```
+## launch a keyboard driver
+any package that can send out commands on /cmd_vel will work to drive the robot a good one is the keyboard teleop
+```
+roslaunch J5_2dnav j5_keyboard_teleop.launch
+```
 ### navigation and tourguide mode
+#### launch navigation
+```
+roslaunch J5_2dnav J5_configuration.launch
+```
+#### launch move_base
+```
+roslaunch J5_2dnav move_base.launch
+```
+#### launch tour
 
+```
+roslaunch tour_guide tour_guide.launch
+```
 ## simulation
 the simulation was built of the turtlebot tutorials do to the rapid on set of corona virus and rapidly aproaching end of the semester.
 #### launch gazebo
@@ -64,7 +102,7 @@ roslaunch turtlebot3_gazebo turtlebot3_house.launch
 export TURTLEBOT3_MODEL=waffle
 roslaunch turtlebot3_navigation turtlebot3_navigation.launch
 ```
-this lau
+this node starts the tour 
 #### terminal 3
 ```
 roslaunch tour_guide tour_guide.launch

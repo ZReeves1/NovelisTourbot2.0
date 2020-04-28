@@ -1,0 +1,6 @@
+<launch>
+    <!--this launches a keyboard driver that-->
+    <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py"  name="teleop" output="screen"/>
+    <!--launch rosbridge to control the robot-->
+    <node name="restful_bridge_server" pkg="bluetooth_bridge" type="server.js" />
+</launch> 

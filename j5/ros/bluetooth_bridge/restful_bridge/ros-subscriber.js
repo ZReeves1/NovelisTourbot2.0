@@ -18,7 +18,7 @@ const emittername = new RosEmitter();
 const cmd_velmsgEmitter = new RosEmitter();
 //const lidarMsgEmitter = new RosEmitter();
 const posMsgEmitter = new RosEmitter();
-const roslogMsgEmiter = new RosEmitter();
+//const roslogMsgEmitter = new RosEmitter();
 
 //these are where we gather data to send to the server using these call backs
 /*
@@ -40,14 +40,15 @@ function moveCmdCB(msg){
 
 function posCB(msg){
   posMsgEmitter.emit('update', {
-    msg
+    msg:msg.pose
   });
 }
 
-function roslogCB(msg){
-  roslogMsgEmiter.emit('update',{
-   msg});
-}
+//function roslogCB(msg){
+//  roslogMsgEmiter.emit('update',{
+//   msg
+//});
+//}
 
 //initiate the ros node that executes the callbacks
 /*
@@ -57,7 +58,7 @@ nh.subscribe('desired ros topic', 'subscribed data type',callback function)
 rosnodejs.initNode('data_bridge').then((nh) => {
   nh.subscribe('/amcl_pose', 'geometry_msgs/PoseWithCovarianceStamped', posCB)
   nh.subscribe('/cmd_vel','geometry_msgs/Twist',moveCmdCB)
-  nh.subsrcibe('/rosout','String',roslogCB) 
+ // nh.subscribe('/rosout','String',roslogCB) 
 });
 
 console.log("Test if this runs...");
@@ -65,6 +66,7 @@ console.log("Test if this runs...");
 module.exports = {
   'cmd_velMsg': cmd_velmsgEmitter,
   //'lidarMsg' : lidarMsgEmitter,
-  'posMsg': posMsgEmitter
+  'posMsg': posMsgEmitter,
+  //'roslogMsg':roslogMsgEmitter
 }
 // lidarMsg.on('update', (msg)=>{global_msg = msg});

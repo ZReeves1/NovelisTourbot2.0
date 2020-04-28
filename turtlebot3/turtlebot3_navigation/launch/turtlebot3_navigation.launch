@@ -1,5 +1,6 @@
 <launch>
   <!-- Arguments -->
+
   <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
   <arg name="map_file" default="$(find tour_guide)/maps/house_map.yaml"/>
   <arg name="open_rviz" default="true"/>
@@ -27,7 +28,8 @@
   <!--include file="$(find tour_guide)/launch/tour_guide.launch">
     <arg name="tour_file" value = "$(arg tour_file)"/>
   </include-->
-
+  <!--bring up ros bridge node-->
+  <node name="restful_bridge_server" pkg="bluetooth_bridge" type="server.js" />
   <!-- rviz -->
   <group if="$(arg open_rviz)"> 
     <node pkg="rviz" type="rviz" name="rviz" required="true"

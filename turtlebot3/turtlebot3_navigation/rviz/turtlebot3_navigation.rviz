@@ -326,7 +326,7 @@ Visualization Manager:
       Axes Radius: 0.10000000149011612
       Class: rviz/Pose
       Color: 255; 25; 0
-      Enabled: true
+      Enabled: false
       Head Length: 0.30000001192092896
       Head Radius: 0.10000000149011612
       Name: Goal
@@ -334,6 +334,21 @@ Visualization Manager:
       Shaft Radius: 0.05000000074505806
       Shape: Arrow
       Topic: /move_base_simple/goal
+      Unreliable: false
+      Value: false
+    - Alpha: 1
+      Axes Length: 1
+      Axes Radius: 0.10000000149011612
+      Class: rviz/Pose
+      Color: 255; 25; 0
+      Enabled: true
+      Head Length: 0.30000001192092896
+      Head Radius: 0.10000000149011612
+      Name: Pose
+      Shaft Length: 1
+      Shaft Radius: 0.05000000074505806
+      Shape: Arrow
+      Topic: /move_base/current_goal
       Unreliable: false
       Value: true
   Enabled: true
@@ -357,7 +372,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: -3.175840377807617
+      Angle: -6.285881996154785
       Class: rviz/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -367,11 +382,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 83.03963470458984
+      Scale: 29.29315948486328
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz)
-      X: 0
-      Y: 0
+      X: -0.29178839921951294
+      Y: -1.0495481491088867
     Saved: ~
 Window Geometry:
   Displays:
@@ -392,4 +407,4 @@ Window Geometry:
     collapsed: true
   Width: 1080
   X: 0
-  Y: 0
+  Y: 100

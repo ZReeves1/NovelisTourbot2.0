@@ -1,10 +1,9 @@
 <launch>
-<!--set up the physical dimentions of the robot ie locationof intel camera and lidar reletive to robot base the world=>odometry_frame=>base_linkframe=>laser_frame -->
+<!--set up the physical dimentions of the robot ie locationof intel camera and lidar reletive to robot base the world=>odometry_frame=>base_linkframe=>laser_frame these parameters need to be applied with in the tf broadcaster. this is where any problems relatiing to a sensor transmitting data that is out of alignment can be found-->
  <node pkg="robot_setup_tf" type="tf_broadcaster" name="robot_tf_setup" output="screen">
-    <!--param name="transform_configuration_param" value="param_value" /-->
  </node>
 
-<!--launch lidar scan node-->
+<!--launch lidar scan node this launches the rp lidar and broadcasts its sensor stream on the base_laser topic-->
    <node pkg="rplidar_ros" type="rplidarNode" name="rplidarNode" output="screen">
     <param name="serial_port"         type="string" value="/dev/ttyUSB0"/>
   <param name="serial_baudrate"     type="int"    value="115200"/><!--A1/A2 -->
@@ -17,7 +16,7 @@
  <!--node pkg="odom_publisher" type="py_odom_publisher.py" name="odom_publisher" output="screen">
  </node-->
 
-<!-- launch the intel camera 2/24 very buggy-->
+<!-- launch the intel camera 2/24 very buggy. this launches the intel camera it is not very reliable-->
 <include file="$(find realsense2_camera)/launch/rs_t265.launch"/>
 
 <!--launch the rosnodejs running the cmdvel bridge-->

@@ -1,0 +1,20 @@
+######
+#this file is for selecting tours
+
+import json
+import rospy
+import re
+
+
+class interface:
+
+  def __init__(self):
+  
+  def read_points(self):
+  
+  def read_tour(self):
+  
+  def calc_cost(self):
+  
+  
+

@@ -4,7 +4,7 @@
 import requests
 
 #url to get data from
-url = 'http://localhost:8080'
+url = 'http://localhost:8080/cmd'
 
 #start a new sesion
 s = requests.Session()
